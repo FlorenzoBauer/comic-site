@@ -1,0 +1,49 @@
+# --- OS Specific ---
+.DS_Store
+Thumbs.db
+
+# --- Environment & Secrets ---
+# NEVER commit your credentials to GitHub
+.env
+*.env.local
+
+# --- Go Backend ---
+# Ignore the compiled binary
+/comic-api
+/server
+/main
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go toolchain
+bin/
+pkg/
+
+# --- React Frontend (Vite) ---
+# Ignore dependencies
+web/node_modules/
+/node_modules/
+
+# Ignore production builds
+web/dist/
+web/build/
+
+# Vite/NPM logs
+web/npm-debug.log*
+web/yarn-debug.log*
+web/yarn-error.log*
+web/pnpm-debug.log*
+
+# --- Database ---
+# Ignore your SQL backups (if you store them in root, 
+# otherwise remove this if you want to track them)
+*.sql
+
+# --- Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
