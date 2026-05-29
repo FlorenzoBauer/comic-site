@@ -327,25 +327,25 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func LogoutHandler(w http.ResponseWriter, r *http.Request) {
-  cookie, err := r.Cookie("session_token")
-  if err == nil {
-    // Remove session from DB
-    database.DB.Exec("DELETE FROM sessions WHERE token = $1", cookie.Value)
-  }
+    cookie, err := r.Cookie("session_token")
+    if err == nil {
+        // Remove session from DB
+        database.DB.Exec("DELETE FROM sessions WHERE token = $1", cookie.Value)
+    }
 
-  // Clear the cookie in the browser
-  http.SetCookie(w, &http.Cookie{
-    Name:     "session_token",
-    Value:    token,
-    Path:     "/",
-    Domain:   ".up.railway.app", // Allows both subdomains to read it
-    HttpOnly: true,
-    Secure:   true,
-    SameSite: http.SameSiteNoneMode, // Required for cross-subdomain
-})
+    // Clear the cookie in the browser
+    http.SetCookie(w, &http.Cookie{
+        Name:     "session_token",
+        Value:    "", // Empty string clears it
+        Expires:  time.Unix(0, 0),
+        HttpOnly: true,
+        Path:     "/",
+        Secure:   true, 
+        SameSite: http.SameSiteNoneMode,
+    })
 
-  w.Header().Set("Content-Type", "application/json")
-  w.Write([]byte(`{"message": "logged out"}`))
+    w.Header().Set("Content-Type", "application/json")
+    w.Write([]byte(`{"message": "logged out"}`))
 }
 
 func AuthStatusHandler(w http.ResponseWriter, r *http.Request) {
