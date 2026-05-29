@@ -336,11 +336,13 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
   // Clear the cookie in the browser
   http.SetCookie(w, &http.Cookie{
     Name:     "session_token",
-    Value:    "",
-    Expires:  time.Unix(0, 0),
-    HttpOnly: true,
+    Value:    token,
     Path:     "/",
-  })
+    Domain:   ".up.railway.app", // Allows both subdomains to read it
+    HttpOnly: true,
+    Secure:   true,
+    SameSite: http.SameSiteNoneMode, // Required for cross-subdomain
+})
 
   w.Header().Set("Content-Type", "application/json")
   w.Write([]byte(`{"message": "logged out"}`))
