@@ -4,6 +4,7 @@ import { Camera, Search, Upload as UploadIcon, X, Check, Loader2 } from 'lucide-
 import '../App.css';
 
 function Upload() {
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
   const [type, setType] = useState('comic');
   const [preview, setPreview] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
@@ -34,7 +35,7 @@ function Upload() {
     try {
       // Passing both q (query) and n (number) to your Go backend
       // FIXED: Added credentials: 'include' for the login system
-      const res = await fetch(`http://localhost:8080/api/scrape-image?q=${encodeURIComponent(name)}&n=${encodeURIComponent(number)}`, {
+      const res = await fetch(`${baseUrl}/api/scrape-image?q=${encodeURIComponent(name)}&n=${encodeURIComponent(number)}`, {
         method: 'GET',
         credentials: 'include'
       });
@@ -69,7 +70,7 @@ function Upload() {
     }
 
     // FIXED: Added credentials: 'include' for the login system
-    const res = await fetch('http://localhost:8080/api/upload', {
+    const res = await fetch(`${baseUrl}/api/upload`, {
       method: 'POST',
       body: formData,
       credentials: 'include'

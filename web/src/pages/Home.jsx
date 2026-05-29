@@ -5,6 +5,7 @@ import ComicCard from '../components/ComicCard';
 import '../App.css';
 
 function Home() {
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
   const [allComics, setAllComics] = useState([]); // Raw data from DB
   const [showFilters, setShowFilters] = useState(false);
   const location = useLocation();
@@ -18,7 +19,7 @@ function Home() {
   const searchQuery = new URLSearchParams(location.search).get('search') || "";
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/comics?search=${searchQuery}`, {
+    fetch(`${baseUrl}/api/comics?search=${searchQuery}`, {
       method: 'GET',
       credentials: 'include',
     })

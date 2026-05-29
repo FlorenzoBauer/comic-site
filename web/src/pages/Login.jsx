@@ -4,6 +4,7 @@ import { useAuth } from '../components/AuthContext';
 import '../App.css';
 
 function Login() {
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -18,7 +19,7 @@ function Login() {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:8080/api/login', {
+      const response = await fetch(`${baseUrl}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

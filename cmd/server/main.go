@@ -39,7 +39,7 @@ func main() {
   r.Use(middleware.Logger)
   r.Use(middleware.Recoverer)
   r.Use(cors.Handler(cors.Options{
-    AllowedOrigins:   []string{"http://localhost:5173"},
+    AllowedOrigins:   []string{"http://localhost:5173", "https://comic-site-fe-production.up.railway.app"},
     AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
     AllowedHeaders:   []string{"Accept", "Content-Type", "Authorization"},
     ExposedHeaders:   []string{"Set-Cookie"},

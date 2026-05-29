@@ -6,9 +6,9 @@ const FALLBACK = "https://images.unsplash.com/photo-1580234811497-9df7fd2f357e?q
 
 function CollectableCard({ item }) {
   if (!item) return null;
-
+const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
   // Handle both local uploads and external URLs
-  const API_URL = "http://localhost:8080/";
+  const API_URL = baseUrl;
   const imageSrc = item.image_url?.startsWith('http') 
     ? item.image_url 
     : item.image_url ? `${API_URL}${item.image_url}` : FALLBACK;

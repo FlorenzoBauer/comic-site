@@ -7,11 +7,11 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch('http://localhost:8080/api/auth/status', {
+        const res = await fetch(`${baseUrl}/api/auth/status`, {
           credentials: 'include' // CRITICAL: Sends the cookie to Go
         });
         const data = await res.json();
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       // 1. Tell Go to delete the session from the DB
-      await fetch('http://localhost:8080/api/logout', { 
+      await fetch(`${baseUrl}}/api/logout`, { 
         method: 'POST', 
         credentials: 'include' 
       });

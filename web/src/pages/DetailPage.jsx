@@ -6,6 +6,7 @@ import '../App.css';
 const FALLBACK = "https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?q=80&w=600&auto=format&fit=crop";
 
 function DetailPage() {
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
   const { type, id } = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState(null);
@@ -18,7 +19,7 @@ function DetailPage() {
 
   useEffect(() => {
     // FIXED: Added credentials: 'include'
-    fetch(`http://localhost:8080/api/${type}/${id}`, {
+    fetch(`${baseUrl}/api/${type}/${id}`, {
       method: 'GET',
       credentials: 'include',
     })
@@ -32,7 +33,7 @@ function DetailPage() {
 
   if (!data) return <div className="vault-shell">DECRYPTING_RECORD...</div>;
 
-  const API_URL = "http://localhost:8080/";
+  const API_URL = baseUrl;
   const imageSrc = data.image_url?.startsWith('http') 
     ? data.image_url 
     : data.image_url ? `${API_URL}${data.image_url}` : FALLBACK;
@@ -49,7 +50,7 @@ function DetailPage() {
     setStatus("COMMITTING...");
     try {
       // FIXED: Added credentials: 'include'
-      const res = await fetch(`http://localhost:8080/api/${type}/${id}`, {
+      const res = await fetch(`${baseUrl}/api/${type}/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(editForm),
@@ -93,7 +94,7 @@ function DetailPage() {
     setStatus("PURGING_RECORD...");
     try {
       // FIXED: Added credentials: 'include'
-      const res = await fetch(`http://localhost:8080/api/${type}/${id}`, {
+      const res = await fetch(`${baseUrl}/api/${type}/${id}`, {
         method: 'DELETE',
         credentials: 'include',
       });

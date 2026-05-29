@@ -6,9 +6,9 @@ const FALLBACK = "https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?q
 
 function ComicCard({ comic }) {
   if (!comic) return null;
-
+const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
   // Handle both local uploads and external URLs
-  const API_URL = "http://localhost:8080/";
+  const API_URL = baseUrl;
   const imageSrc = comic.image_url?.startsWith('http') 
     ? comic.image_url 
     : comic.image_url ? `${API_URL}${comic.image_url}` : FALLBACK;

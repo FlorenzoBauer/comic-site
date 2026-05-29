@@ -15,9 +15,10 @@ function Collectables() {
   const [conditionFilter, setConditionFilter] = useState('all');
 
   const searchQuery = new URLSearchParams(location.search).get('search') || "";
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/collectables?search=${searchQuery}`, {
+    fetch(`${baseUrl}/api/collectables?search=${searchQuery}`, {
       method: 'GET',
       credentials: 'include',
     })
