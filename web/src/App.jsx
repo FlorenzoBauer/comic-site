@@ -7,7 +7,6 @@ import Collectables from './pages/Collectables'
 import DetailPage from './pages/DetailPage'
 import Upload from './pages/Upload' 
 import Login from './pages/Login'
-import Intake from './pages/Intake'
 
 function App() {
   return (
@@ -26,11 +25,6 @@ function App() {
               </ProtectedRoute>
             } />
 
-             <Route path="/intake" element={
-              <ProtectedRoute>
-                <Intake />
-              </ProtectedRoute>
-            } />
             
             <Route path="/collectables" element={
               <ProtectedRoute>
