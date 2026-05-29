@@ -318,8 +318,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
         Expires:  expiresAt,
         HttpOnly: true,
         Path:     "/",
-        SameSite: http.SameSiteLaxMode,
-        Secure:   false,
+        SameSite: http.SameSiteNoneMode,
+        Secure:   true,
     })
 
     w.Header().Set("Content-Type", "application/json")
